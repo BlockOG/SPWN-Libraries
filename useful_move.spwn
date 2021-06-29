@@ -1,0 +1,76 @@
+
+impl @group {
+    
+    moveAtX: #[desc("Implementation of the move trigger at X")] 
+    (
+        self, 
+        #[desc("At what X to move")] at: @number, 
+        #[desc("Units to move on the X axis")] x: @number, 
+        #[desc("Units to move on the Y axis")] y: @number, 
+        #[desc("Duration of movement")] duration: @number = 0, 
+        easing: @easing_type = NONE, 
+        easing_rate: @number = 2
+    ) {
+        $.add( trigger{
+            OBJ_ID: 901,
+            TARGET: self,
+            X: at,
+            MOVE_X: x * 3,
+            MOVE_Y: y * 3,
+            DURATION: duration,
+            EASING: easing.id,
+            EASING_RATE: easing_rate,
+        })
+    },
+    moveAtXY: #[desc("Implementation of the move trigger at X and Y")] 
+    (
+        self, 
+        #[desc("At what X to move")] atX: @number, 
+        #[desc("At what Y to move")] atY: @number, 
+        #[desc("Units to move on the X axis")] x: @number, 
+        #[desc("Units to move on the Y axis")] y: @number, 
+        #[desc("Duration of movement")] duration: @number = 0, 
+        easing: @easing_type = NONE, 
+        easing_rate: @number = 2
+    ) {
+        $.add( trigger{
+            OBJ_ID: 901,
+            TARGET: self,
+            X: atX,
+            Y: atY,
+            MOVE_X: x * 3,
+            MOVE_Y: y * 3,
+            DURATION: duration,
+            EASING: easing.id,
+            EASING_RATE: easing_rate,
+            TOUCH_TRIGGERED: true,
+        })
+    },
+    moveAtY: #[desc("Implementation of the move trigger at Y")] 
+    (
+        self, 
+        #[desc("At what Y to move")] at: @number, 
+        #[desc("Units to move on the X axis")] x: @number, 
+        #[desc("Units to move on the Y axis")] y: @number, 
+        #[desc("Duration of movement")] duration: @number = 0,  
+        easing: @easing_type = NONE, 
+        easing_rate: @number = 2
+    ) {
+        grp = hidden_group
+        
+        $.add( trigger{
+            OBJ_ID: 901,
+            Y: at,
+            TARGET: self,
+            MOVE_X: x * 3,
+            MOVE_Y: y * 3,
+            DURATION: duration,
+            EASING: easing.id,
+            EASING_RATE: easing_rate,
+            GROUPS: grp,
+            TOUCH_TRIGGERED: true,
+        })
+        
+        grp.lock_to_player(lock_x = true, lock_y = false, duration = 99999)
+    },
+}
