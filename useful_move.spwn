@@ -1,4 +1,6 @@
 
+extract obj_props
+
 impl @group {
     
     moveAtX: #[desc("Implementation of the move trigger at X")] 
@@ -11,10 +13,11 @@ impl @group {
         easing: @easing_type = NONE, 
         easing_rate: @number = 2
     ) {
-        $.add( trigger{
+        $.add( obj{
             OBJ_ID: 901,
             TARGET: self,
             X: at,
+            Y: 300,
             MOVE_X: x * 3,
             MOVE_Y: y * 3,
             DURATION: duration,
@@ -33,7 +36,7 @@ impl @group {
         easing: @easing_type = NONE, 
         easing_rate: @number = 2
     ) {
-        $.add( trigger{
+        $.add( obj{
             OBJ_ID: 901,
             TARGET: self,
             X: atX,
@@ -58,9 +61,10 @@ impl @group {
     ) {
         grp = hidden_group
         
-        $.add( trigger{
+        $.add( obj{
             OBJ_ID: 901,
             Y: at,
+            X: 0,
             TARGET: self,
             MOVE_X: x * 3,
             MOVE_Y: y * 3,
